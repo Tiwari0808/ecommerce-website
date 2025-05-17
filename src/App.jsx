@@ -1,18 +1,16 @@
 import React from "react";
-import { products } from "./components/Products";
+import { useCart } from "./context/CartContext";
+import FinalNavbar from "./components/FinalNavbar";
+import Products from "./components/Products";
 
 
 function App() {
+  const {cartItems} = useCart();
   return (
-    <div>
-      {products.map((item)=>{
-        return <div>
-          <li>{item.title}</li>
-          <li>Price: {item.price}</li>
-          <img src={item.imageUrl}/>
-        </div>
-      })}
-    </div>
+    <>
+     <FinalNavbar></FinalNavbar>
+     <Products></Products>
+    </>
   );
 }
 
