@@ -20,6 +20,7 @@ const FinalNavbar = () => {
           <Nav.Link as={Link} to={'/'}>Home</Nav.Link>
           <Nav.Link as={Link} to={'/store'}>Store</Nav.Link>
           <Nav.Link as={Link} to={'/about'}>About</Nav.Link>
+          <Nav.Link as={Link} to={'/ContactUs'}>Contact Us</Nav.Link>
         </Nav>
         <Button variant="warning">
           Cart <span className="ms-2 badge bg-dark text-white">{totalQuantity}</span>
