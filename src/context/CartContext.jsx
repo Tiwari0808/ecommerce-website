@@ -32,8 +32,20 @@ const CartProvider = ({children}) => {
     })
   }
 
+  const increaseCartItem = (id)=>{
+    setCartItems((cartProducts)=>{
+      const isExist = cartProducts.find((item)=>item.id === id);
+      if(isExist){
+      return  cartProducts.map((item)=>{
+          return item.id === id ? {...item,quantity:item.quantity + 1} : item
+        })
+      }
+      return cartProducts
+    })
+  }
+
   return (
-    <CartContext.Provider value={{cartItems,addToCart,removeFromCart}}>
+    <CartContext.Provider value={{cartItems,addToCart,removeFromCart,increaseCartItem}}>
         {children}
     </CartContext.Provider>
   )
