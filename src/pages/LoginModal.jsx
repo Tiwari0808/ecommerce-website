@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState} from "react";
 import {
   Button,
   Card,
@@ -10,6 +10,8 @@ import {
 } from "react-bootstrap";
 import "./LoginModal.css";
 import { AuthContext } from "../context/auth-context";
+import { useNavigate } from "react-router-dom";
+
 
 const LoginModal = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,6 +19,7 @@ const LoginModal = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const { isLoggedIn, login } = useContext(AuthContext);
+  const navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredEmail = emailInputRef.current.value;
@@ -54,6 +57,7 @@ const LoginModal = () => {
       })
       .then((res) => {
         login(res.idToken);
+        navigate('/',{replace:true})
         console.log(res);
       })
       .catch((err) => {
