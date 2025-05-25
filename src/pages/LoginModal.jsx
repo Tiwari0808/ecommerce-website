@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -9,12 +9,14 @@ import {
   Spinner,
 } from "react-bootstrap";
 import "./LoginModal.css";
+import { AuthContext } from "../context/auth-context";
 
 const LoginModal = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setisLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const { isLoggedIn, login } = useContext(AuthContext);
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredEmail = emailInputRef.current.value;
@@ -37,23 +39,26 @@ const LoginModal = () => {
         returnSecureToken: true,
       }),
       headers: { "Content-Type": "application/json" },
-    }).then((res) => {
-      setisLoading(false);
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((res) => {
-          let errMsg = res.error.message;
-          alert(errMsg);
-          throw new Error(errMsg);
-        });
-      }
-    }).then((res)=>{
-       console.log(res);
-       
-    }).catch((err)=>{
-        alert(err)
     })
+      .then((res) => {
+        setisLoading(false);
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((res) => {
+            let errMsg = res.error.message;
+            alert(errMsg);
+            throw new Error(errMsg);
+          });
+        }
+      })
+      .then((res) => {
+        login(res.idToken);
+        console.log(res);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
   return (
     <Container className="mt-5">
