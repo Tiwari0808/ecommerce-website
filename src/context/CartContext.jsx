@@ -7,7 +7,7 @@ export const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const {email} = useContext(AuthContext)
-  const baseURL = "https://crudcrud.com/api/ced2033407c04c85945f490d078ad5b2";
+  const baseURL = "https://crudcrud.com/api/13bfecd408294db0aa871462f4d146b5";
   const userCartURL = `${baseURL}/cart${email?.replace(/[@.]/g, "")}`;
 
   

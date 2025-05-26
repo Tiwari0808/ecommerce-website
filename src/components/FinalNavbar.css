@@ -1,0 +1,44 @@
+.navbar-expand-lg .navbar-collapse {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.navbar-expand-lg .navbar-nav {
+  align-items: center;
+}
+.mx-2 {
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+  display: flex;
+  gap: 2rem;
+}
+
+svg#brand-svg {
+  font-size: 2rem;
+}
+
+span.cart-count.badge.bg-dark {
+  position: relative;
+  font-size: 0.5rem;
+  top: -12px;
+  right: -9px;
+}
+
+.cart-svg {
+  position: absolute;
+}
+
+button#cart-btn {
+  display: flex;
+  align-items: center;
+}
+
+span.navbar-toggler-icon {
+  font-size: 1rem;
+  color: black;
+}
+
+/* .navbar-expand-lg .navbar-nav {
+  flex-direction: row;
+  gap: 5rem;
+} */

@@ -12,16 +12,16 @@ import { AuthContext } from "./context/auth-context";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [show, setShow] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <>
       <FinalNavbar
-        isCartOpen={isCartOpen}
-        setIsCartOpen={setIsCartOpen}></FinalNavbar>
-      {/* <LoginModal /> */}
-      {isCartOpen && <CartModule />}
+        show={show}
+        setShow={setShow}/>
+
+      {<CartModule show={show} setShow={setShow}/>}
       <Routes>
         <Route path="/login" element={<LoginModal />}></Route>
         <Route

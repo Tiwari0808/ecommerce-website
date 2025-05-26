@@ -1,59 +1,55 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { AuthContext } from "../context/auth-context";
+import { Button, Modal, ListGroup, Row, Col } from "react-bootstrap";
+import './CartModule.css'
 
-const CartModule = () => {
-  const { cartItems, addToCart, removeFromCart, increaseCartItem } =
-    useContext(CartContext);
-  const totalAmount = cartItems.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
-  const { email } = useContext(AuthContext);
-  let cleanedEmail = email.replace(/[@.]/g, "");
-  const baseURL = "https://crudcrud.com/api/ced2033407c04c85945f490d078ad5b2";
-  const userCartURL = `${baseURL}/cart${cleanedEmail}`;
+const CartModule = ({ show, setShow }) => {
+  const { cartItems, removeFromCart,increaseCartItem } = useContext(CartContext);
+  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
-    <div
-      className="cart-container p-3 bg-light border rounded"
-      style={{ maxWidth: "700px", margin: "auto" }}>
-      <h2 className="mb-4 text-center">Cart</h2>
-      {cartItems.map((item, index) => (
-        <div
-          key={index}
-          className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-          <img
-            src={item.imageUrl}
-            alt={item.title}
-            width="80"
-            height="80"
-            className="rounded"
-          />
-          <div className="flex-grow-1 ms-3">
-            <h5 className="mb-1">{item.title}</h5>
-            <p className="mb-0">Price: ₹{item.price}</p>
-            <p className="mb-0">Quantity: {item.quantity}</p>
-            <p className="mb-0 fw-bold">Total: ₹{item.price * item.quantity}</p>
-          </div>
-          <button
-            onClick={() => {
-              increaseCartItem(item.id);
-            }}
-            className="btn btn-primary fw-bolder text-bg-success">
-            +
-          </button>
-          <button
-            onClick={() => {
-              removeFromCart(item.id);
-            }}
-            className="btn btn-primary fw-bolder text-bg-danger">
-            -
-          </button>
-        </div>
-      ))}
-
-      <h4 className="text-end mt-4">Grand Total: ₹{totalAmount}</h4>
-    </div>
+    <Modal show={show} onHide={() => setShow(false)} size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>Your Shopping Cart</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty</p>
+        ) : (
+          <ListGroup variant="flush">
+            {cartItems.map((item, index) => (
+              <ListGroup.Item key={index}>
+                <Row className="align-items-center">
+                  <Col xs={3}>
+                    <img src={item.imageUrl} alt={item.title} width="80%" height="80%" className="rounded" />
+                  </Col>
+                  <Col xs={6}>
+                    <p className="mb-0" >Price: ₹{item.price}</p>
+                    <p className="mb-0 mb-0 ">Quantity: {item.quantity}</p>
+                    <p className="mb-0 fw-bold">Total: ₹{item.price * item.quantity}</p>
+                  </Col>
+                  <Col xs={3} className="text-end">
+                    <Button variant="outline-danger" size="sm" className="" onClick={() => removeFromCart(item.id)}>
+                      -
+                    </Button>
+                    <Button variant="outline-success" size="sm" onClick={() => increaseCartItem(item.id)}>
+                      +
+                    </Button>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        )}
+      </Modal.Body>
+      <Modal.Footer id="modal-footer">
+        <h4 className="me-auto">Grand Total: ₹{totalAmount}</h4>
+        <Button variant="secondary" onClick={() => setShow(false)}>
+          Close
+        </Button>
+        <Button variant="primary">Checkout</Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
