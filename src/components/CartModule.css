@@ -1,6 +1,7 @@
-#modal-footer {
+#footer1 {
   display: flex;
   flex-shrink: 0;
+  flex-wrap: nowrap;
   align-items: center;
   padding: calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5);
   background-color: var(--bs-modal-footer-bg);
@@ -9,3 +10,11 @@
   border-bottom-right-radius: var(--bs-modal-inner-border-radius);
   border-bottom-left-radius: var(--bs-modal-inner-border-radius);
 }
+
+h4.me-auto {
+        margin-right: auto !important;
+    width: 50%;
+    font-size: 1rem;
+    text-align: center;
+}
+

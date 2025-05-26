@@ -42,7 +42,7 @@ const CartModule = ({ show, setShow }) => {
           </ListGroup>
         )}
       </Modal.Body>
-      <Modal.Footer id="modal-footer">
+      <Modal.Footer id="footer1">
         <h4 className="me-auto">Grand Total: ₹{totalAmount}</h4>
         <Button variant="secondary" onClick={() => setShow(false)}>
           Close

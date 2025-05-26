@@ -43,6 +43,7 @@ const ContactUs = () => {
             placeholder="Enter Your Name"
             name="name"
             value={formData.name}
+            required
             onChange={handleChange}
           />
         </Form.Group>
@@ -54,6 +55,7 @@ const ContactUs = () => {
             placeholder="Enter Email"
             name="email"
             value={formData.email}
+            required
             onChange={handleChange}
           />
         </Form.Group>
@@ -66,6 +68,7 @@ const ContactUs = () => {
             name="mobile"
             value={formData.mobile}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
