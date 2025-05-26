@@ -56,12 +56,13 @@ const LoginModal = () => {
         }
       })
       .then((res) => {
-        login(res.idToken);
+        login(res.idToken,enteredEmail);
         navigate('/',{replace:true})
         console.log(res);
       })
       .catch((err) => {
-        alert(err);
+        console.log(err)
+        alert(err.data);
       });
   };
   return (
